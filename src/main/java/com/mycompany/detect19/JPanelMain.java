@@ -10,9 +10,8 @@ public class JPanelMain extends javax.swing.JPanel {
      */
     public JPanelMain() {
         initComponents();
-        jComboBox1.setVisible(false);
         jButton1.setEnabled(true);
-        this.setSize(1280,400);
+        this.setSize(555,400);
     }
 
     /**
@@ -55,20 +54,20 @@ public class JPanelMain extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(380, 250, 110, 30);
+        jButton1.setBounds(370, 250, 120, 30);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel4.setText("Detect19");
         add(jLabel4);
-        jLabel4.setBounds(190, 10, 210, 60);
+        jLabel4.setBounds(180, 10, 210, 60);
 
         jLabel5.setText("Espirros");
         add(jLabel5);
-        jLabel5.setBounds(300, 120, 80, 14);
+        jLabel5.setBounds(280, 120, 90, 14);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
         add(jComboBox1);
-        jComboBox1.setBounds(110, 110, 110, 30);
+        jComboBox1.setBounds(120, 110, 120, 30);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +79,7 @@ public class JPanelMain extends javax.swing.JPanel {
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
         add(jComboBox3);
-        jComboBox3.setBounds(110, 180, 110, 30);
+        jComboBox3.setBounds(120, 180, 120, 30);
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
@@ -89,31 +88,31 @@ public class JPanelMain extends javax.swing.JPanel {
             }
         });
         add(jComboBox4);
-        jComboBox4.setBounds(380, 180, 110, 30);
+        jComboBox4.setBounds(370, 180, 120, 30);
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
         add(jComboBox5);
-        jComboBox5.setBounds(110, 250, 110, 30);
+        jComboBox5.setBounds(120, 250, 120, 30);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
         add(jComboBox2);
-        jComboBox2.setBounds(380, 110, 110, 30);
+        jComboBox2.setBounds(370, 110, 120, 30);
 
         jLabel6.setText("Falta de Ar");
         add(jLabel6);
-        jLabel6.setBounds(30, 260, 80, 14);
+        jLabel6.setBounds(30, 260, 90, 14);
 
         jLabel7.setText("Febre");
         add(jLabel7);
-        jLabel7.setBounds(30, 120, 80, 14);
+        jLabel7.setBounds(30, 120, 90, 14);
 
         jLabel8.setText("Dor de Cabeça");
         add(jLabel8);
-        jLabel8.setBounds(300, 190, 80, 14);
+        jLabel8.setBounds(280, 190, 90, 14);
 
         jLabel9.setText("Nariz Entupido");
         add(jLabel9);
-        jLabel9.setBounds(30, 190, 80, 14);
+        jLabel9.setBounds(30, 190, 90, 14);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

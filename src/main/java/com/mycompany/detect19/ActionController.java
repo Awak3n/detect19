@@ -46,6 +46,7 @@ public class ActionController implements ActionListener, ItemListener{
                 faltaDeAr = 0;
             }
             showMessage(getDoenca(febre, espirros, narizEntupido, dorDeCabeca, faltaDeAr));
+            System.out.println(""+febre+espirros+narizEntupido+dorDeCabeca+faltaDeAr);
         } 
     }
     
