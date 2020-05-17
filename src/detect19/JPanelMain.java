@@ -1,4 +1,4 @@
-package com.mycompany.detect19;
+package detect19;
 
 /**
  *
