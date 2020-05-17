@@ -2,6 +2,7 @@ package detect19;
 
 import ADReNA_API.Data.DataSet;
 import ADReNA_API.Data.DataSetObject;
+import ADReNA_API.NeuralNetwork.Backpropagation;
 import ADReNA_API.NeuralNetwork.Kohonen;
 
 import java.awt.event.ActionEvent;
@@ -68,14 +69,39 @@ public class ActionController implements ActionListener, ItemListener {
 
         try {
 
-            DataSet dataSet = new DataSet(5, 1);
-            dataSet.Add(new DataSetObject(new double[]{1, 1, 1, 1, 1}, new double[]{1}));
+            Backpropagation minhaRNA = new Backpropagation(5, 1, new int[]{});
+            minhaRNA.SetLearningRate(0.1);
+            minhaRNA.SetErrorRate(0.005);
+            minhaRNA.SetMaxIterationNumber(10000);
 
-            Kohonen kohonen = new Kohonen(5, 3);
-            kohonen.Learn(dataSet);
+            DataSet trainingSet = new DataSet(5, 1);
+
+            trainingSet.Add(new DataSetObject(new double[]{0, 0, 0, 0, 0}, new double[]{0}));
             
-            kohonen.Recognize(new double[]{});
+            trainingSet.Add(new DataSetObject(new double[]{0, 0, 0, 0, 1}, new double[]{0}));
+            trainingSet.Add(new DataSetObject(new double[]{0, 0, 0, 1, 0}, new double[]{0}));
+            trainingSet.Add(new DataSetObject(new double[]{0, 0, 1, 0, 0}, new double[]{0}));
+            trainingSet.Add(new DataSetObject(new double[]{0, 1, 0, 0, 0}, new double[]{0}));
+            trainingSet.Add(new DataSetObject(new double[]{1, 0, 0, 0, 0}, new double[]{0}));
             
+            trainingSet.Add(new DataSetObject(new double[]{1, 0, 0, 0, 1}, new double[]{0}));
+            trainingSet.Add(new DataSetObject(new double[]{1, 0, 0, 1, 0}, new double[]{0}));
+            trainingSet.Add(new DataSetObject(new double[]{1, 0, 1, 0, 0}, new double[]{0}));
+            trainingSet.Add(new DataSetObject(new double[]{1, 1, 0, 0, 0}, new double[]{0}));
+            
+            trainingSet.Add(new DataSetObject(new double[]{1, 1, 0, 0, 1}, new double[]{0}));
+            trainingSet.Add(new DataSetObject(new double[]{1, 1, 0, 1, 0}, new double[]{0}));
+            trainingSet.Add(new DataSetObject(new double[]{1, 1, 1, 0, 0}, new double[]{0}));
+            
+            trainingSet.Add(new DataSetObject(new double[]{1, 1, 1, 0, 1}, new double[]{0}));
+            trainingSet.Add(new DataSetObject(new double[]{1, 1, 1, 1, 0}, new double[]{0}));
+            
+            trainingSet.Add(new DataSetObject(new double[]{1, 1, 1, 1, 1}, new double[]{1}));
+
+            minhaRNA.Learn(trainingSet);
+            
+            System.out.println("Resposta: " + minhaRNA.Recognize(new double[] {febre, espirros, narizEntupido, dorDeCabeca, faltaDeAr})[0]);
+
         } catch (Exception exception) {
             System.out.println("Exception: " + exception.toString());
         }
