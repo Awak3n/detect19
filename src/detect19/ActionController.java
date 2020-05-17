@@ -69,13 +69,13 @@ public class ActionController implements ActionListener, ItemListener {
 
         try {
 
-            Backpropagation minhaRNA = new Backpropagation(5, 1, new int[]{});
-            minhaRNA.SetLearningRate(0.1);
+            Backpropagation minhaRNA = new Backpropagation(5, 1, new int[]{20});
+            minhaRNA.SetLearningRate(0.05);
             minhaRNA.SetErrorRate(0.005);
-            minhaRNA.SetMaxIterationNumber(10000);
+            minhaRNA.SetMaxIterationNumber(50000);
 
             DataSet trainingSet = new DataSet(5, 1);
-
+            
             trainingSet.Add(new DataSetObject(new double[]{0, 0, 0, 0, 0}, new double[]{0}));
             
             trainingSet.Add(new DataSetObject(new double[]{0, 0, 0, 0, 1}, new double[]{0}));
@@ -100,7 +100,11 @@ public class ActionController implements ActionListener, ItemListener {
 
             minhaRNA.Learn(trainingSet);
             
-            System.out.println("Resposta: " + minhaRNA.Recognize(new double[] {febre, espirros, narizEntupido, dorDeCabeca, faltaDeAr})[0]);
+            double resposta = minhaRNA.Recognize(new double[] {febre, espirros, narizEntupido, dorDeCabeca, faltaDeAr})[0];
+            
+            int a = (int) Math.round(resposta);
+            
+            System.out.println("Resposta: " + a);
 
         } catch (Exception exception) {
             System.out.println("Exception: " + exception.toString());
