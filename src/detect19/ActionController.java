@@ -82,7 +82,7 @@ public class ActionController implements ActionListener, ItemListener {
         double n2 = 0.0;
         try {
 
-            Backpropagation minhaRNA = new Backpropagation(5, 2, new int[]{});
+            Backpropagation minhaRNA = new Backpropagation(5, 2, new int[]{20});
             minhaRNA.SetLearningRate(0.15);
             minhaRNA.SetErrorRate(0.001);
             minhaRNA.SetMaxIterationNumber(100000);
