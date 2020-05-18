@@ -3,7 +3,6 @@ package detect19;
 import ADReNA_API.Data.DataSet;
 import ADReNA_API.Data.DataSetObject;
 import ADReNA_API.NeuralNetwork.Backpropagation;
-import ADReNA_API.NeuralNetwork.Kohonen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -65,52 +64,48 @@ public class ActionController implements ActionListener, ItemListener {
         main.jm.jTextField1.setText(text);
     }
 
+    private String getResposta(double n1, double n2){
+        if(n1 >= 0.5 && n2 >= 0.5){
+            return "Saudável";
+        } else if(n1 >= 0.5 && n2 < 0.5){
+            return "Gripe";
+        } else if(n1 < 0.5 && n2 >= 0.5){
+            return "Resfriado";
+        } else if(n1 < 0.5 && n2 < 0.5){
+            return "Covid-19";
+        }    
+        return "ERROR";
+    }
+    
     private String getDoenca(Integer febre, Integer espirros, Integer narizEntupido, Integer dorDeCabeca, Integer faltaDeAr) {
-
+        double n1 = 0.0; 
+        double n2 = 0.0;
         try {
 
-            Backpropagation minhaRNA = new Backpropagation(5, 1, new int[]{20});
-            minhaRNA.SetLearningRate(0.05);
-            minhaRNA.SetErrorRate(0.005);
-            minhaRNA.SetMaxIterationNumber(50000);
+            Backpropagation minhaRNA = new Backpropagation(5, 2, new int[]{});
+            minhaRNA.SetLearningRate(0.15);
+            minhaRNA.SetErrorRate(0.001);
+            minhaRNA.SetMaxIterationNumber(100000);
 
-            DataSet trainingSet = new DataSet(5, 1);
-            
-            trainingSet.Add(new DataSetObject(new double[]{0, 0, 0, 0, 0}, new double[]{0}));
-            
-            trainingSet.Add(new DataSetObject(new double[]{0, 0, 0, 0, 1}, new double[]{0}));
-            trainingSet.Add(new DataSetObject(new double[]{0, 0, 0, 1, 0}, new double[]{0}));
-            trainingSet.Add(new DataSetObject(new double[]{0, 0, 1, 0, 0}, new double[]{0}));
-            trainingSet.Add(new DataSetObject(new double[]{0, 1, 0, 0, 0}, new double[]{0}));
-            trainingSet.Add(new DataSetObject(new double[]{1, 0, 0, 0, 0}, new double[]{0}));
-            
-            trainingSet.Add(new DataSetObject(new double[]{1, 0, 0, 0, 1}, new double[]{0}));
-            trainingSet.Add(new DataSetObject(new double[]{1, 0, 0, 1, 0}, new double[]{0}));
-            trainingSet.Add(new DataSetObject(new double[]{1, 0, 1, 0, 0}, new double[]{0}));
-            trainingSet.Add(new DataSetObject(new double[]{1, 1, 0, 0, 0}, new double[]{0}));
-            
-            trainingSet.Add(new DataSetObject(new double[]{1, 1, 0, 0, 1}, new double[]{0}));
-            trainingSet.Add(new DataSetObject(new double[]{1, 1, 0, 1, 0}, new double[]{0}));
-            trainingSet.Add(new DataSetObject(new double[]{1, 1, 1, 0, 0}, new double[]{0}));
-            
-            trainingSet.Add(new DataSetObject(new double[]{1, 1, 1, 0, 1}, new double[]{0}));
-            trainingSet.Add(new DataSetObject(new double[]{1, 1, 1, 1, 0}, new double[]{0}));
-            
-            trainingSet.Add(new DataSetObject(new double[]{1, 1, 1, 1, 1}, new double[]{1}));
+            DataSet trainingSet = new DataSet(5, 2);
+
+            trainingSet.Add(new DataSetObject(new double[]{0, 0, 0, 0, 0}, new double[]{1, 1}));
+            trainingSet.Add(new DataSetObject(new double[]{0, 1, 1, 0, 0}, new double[]{0, 1}));
+            trainingSet.Add(new DataSetObject(new double[]{1, 0, 1, 1, 0}, new double[]{1, 0}));
+            trainingSet.Add(new DataSetObject(new double[]{1, 0, 0, 1, 0}, new double[]{1, 0}));
+            trainingSet.Add(new DataSetObject(new double[]{1, 0, 0, 1, 1}, new double[]{0, 0}));
+            trainingSet.Add(new DataSetObject(new double[]{1, 0, 0, 0, 1}, new double[]{0, 0}));
 
             minhaRNA.Learn(trainingSet);
             
-            double resposta = minhaRNA.Recognize(new double[] {febre, espirros, narizEntupido, dorDeCabeca, faltaDeAr})[0];
+            n1 = minhaRNA.Recognize(new double[] {febre, espirros, narizEntupido, dorDeCabeca, faltaDeAr})[0];
+            n2 = minhaRNA.Recognize(new double[] {febre, espirros, narizEntupido, dorDeCabeca, faltaDeAr})[1];
             
-            int a = (int) Math.round(resposta);
-            
-            System.out.println("Resposta: " + a);
-
         } catch (Exception exception) {
             System.out.println("Exception: " + exception.toString());
         }
-
-        return "TODO";
+        
+        return getResposta(n1, n2);
     }
-    //controla os dados que chegam do servidor, marcando no campo do cliente
+    
 }
