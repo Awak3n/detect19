@@ -19,7 +19,7 @@ public class MainClient extends javax.swing.JFrame {
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public MainClient() {
-        super("Cripto");
+        super("Detect19");
         initComponents();
         jm = new JPanelMain();
         
