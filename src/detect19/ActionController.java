@@ -66,7 +66,7 @@ public class ActionController implements ActionListener, ItemListener {
 
     private String getResposta(double n1, double n2){
         if(n1 >= 0.5 && n2 >= 0.5){
-            return "Saudável";
+            return "Desconhecido";
         } else if(n1 >= 0.5 && n2 < 0.5){
             return "Gripe";
         } else if(n1 < 0.5 && n2 >= 0.5){
